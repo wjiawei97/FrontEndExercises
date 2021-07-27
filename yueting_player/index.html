@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="wrap">
+        <!-- 播放器主体区域 -->
+        <div class="player_wrap" id="player">
+            <!-- 搜索歌曲区域 -->
+            <div class="search_bar">
+                <img src="images/player_title.png" alt="" />
+                <input type="text" @keyup.enter="searchMusic" v-model="query" id="">
+            </div>
+            <!-- 歌曲内容信息区域 -->
+            <div class="song_content">
+                <!-- 歌曲信息列表 -->
+                <div class="song_wrapper">
+                    <ul class="song_list">
+                        <li v-for="item in musicList">
+                            <a href="javascript:;" @click="playMusic(item.id)"></a>
+                            <b>{{item.name}}</b><span @click="playMV(item.id)" v-if="item.mvid!=0"></span>
+                        </li>
+                    </ul>
+                    <img src="images/line.png" class="left_line">
+                </div>
+                <!-- 歌曲播放区域 -->
+                <div class="player_wrapper" :class="{playing:isPlaying}">
+                    <img src="./images/player_bar.png" class="player_bar" alt="">
+                    <img src="./images/disc.png" class="disc autoRotate" alt="">
+                    <img :src="coverUrl" class="cover autoRotate" alt="">
+                </div>
+                <!-- 评论区域 -->
+                <div class="comment_wrapper">
+                    <h5>热门留言</h5>
+                    <div class="comment_list">
+                        <dl v-for="item in hotComments">
+                            <dt><img :src="item.user.avatarUrl" alt=""></dt>
+                            <dd class="name">{{item.user.nickname}}</dd>
+                            <dd class="detail">{{item.content}}</dd>
+                        </dl>
+                    </div>
+                    <img src="images/line.png" class="right_line">
+                </div>
+                <!-- 歌曲播放器区域 -->
+                <div class="audio_wrapper">
+                    <audio :src="musicUrl" ref="audio" class="myaudio" @play="play" @pause="pause" controls autoplay loop></audio>
+                </div>
+                <!-- 歌曲MV播放区域 -->
+                <div class="video_wrapper" v-show="isShow">  <!-- style="display: none;" -->
+                    <video :src="MVUrl" controls="controls" ref="video"></video>
+                    <div class="mask" @click="closeMV"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+</html>
