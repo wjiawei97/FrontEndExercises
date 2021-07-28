@@ -51,9 +51,9 @@ var vm=new Vue({
         },
 
         // 播放MV
-        playMV:function(id){
+        playMV:function(mvid){
             var that=this;
-            axios.get('https://autumnfish.cn/mv/url?id='+id).then(
+            axios.get('https://autumnfish.cn/mv/url?id='+mvid).then(
                 function(response){
                     that.isShow=true;
                     console.log(response);
