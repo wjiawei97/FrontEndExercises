@@ -1,0 +1,69 @@
+<!--
+ * @Author: your name
+ * @Date: 2021-07-19 18:42:32
+ * @LastEditTime: 2021-07-19 19:22:56
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \xiaohei-todoApp\index.html
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <section id="todoapp">
+        <header class="header">
+            <h1>小黑记事本</h1>
+            <input class="new-todo" v-model="inputValue" @keyup.enter="addItem" autofocus="autofocus" autocomplete="off" placeholder="请输入任务" class="new-tab">
+        </header>
+        
+        <!-- 列表区域 -->
+        <div class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item,index) in list">
+                    <!-- 任务内容 -->
+                    <span class="index">{{index+1}}.</span>
+                    <div class="content">{{item}}</div>
+                    <!-- 删除按钮 -->
+                    <div class="delete" @click="removeItem(index)"></div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- 统计和清空 -->
+        <footer class="footer" v-show="list.length!=0">
+            <span class="todo-count">{{list.length}} items left</span>
+            <div class="clear" @click="clear">clear</div>
+        </footer>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var app=new Vue({
+            el:'#todoapp',
+            data:{
+                list:['learn Javascript','learn WXSS','learn Ajax'],
+                inputValue:''
+            },
+            methods:{
+                addItem:function(){
+                    this.list.push(this.inputValue);
+                    this.inputValue='';
+                },
+                removeItem:function(index){
+                    this.list.splice(index,1);
+                },
+                clear:function(){
+                    this.list=[];
+                }
+            }
+        })
+    </script>
+</body>
+</html>
