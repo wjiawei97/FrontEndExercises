@@ -185,6 +185,16 @@ a cite {
   width: auto;
   margin: 0 15px;
 }
+.pb-layout-admin .pb-footer{
+  position: fixed;
+  left: 200px;
+  right: 0;
+  bottom: 0;
+  height: 44px;
+  line-height: 44px;
+  padding: 0 15px;
+  background-color: #eee;
+}
 .pb-layout-admin .pb-logo {
   position: absolute;
   left: 0;
