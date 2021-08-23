@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: auto;
+        }
+
+        .container .title {
+            background-color: lightblue;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+        }
+
+        .container .item {
+            height: 55px;
+            line-height: 55px;
+            position: relative;
+            border-top: 1px solid #ADD8E6;
+        }
+
+        .container .item img {
+            width: 45px;
+            height: 45px;
+            margin: 5px;
+        }
+
+        .container .item .change {
+            width: 100px;
+            height: 45px;
+            position: absolute;
+            top: 0;
+            right: 50px;
+        }
+
+        .container .item .change a {
+            font-size: 20px;
+            width: 30px;
+            height: 45px;
+            text-decoration: none;
+            background-color: lightgray;
+            vertical-align: middle;
+            padding: 0 5px;
+        }
+
+        .container .item .change .num {
+            width: 40px;
+            height: 25px;
+        }
+
+        .container .item .del {
+            position: absolute;
+            top: 0;
+            right: 0px;
+            width: 40px;
+            text-align: center;
+            font-size: 30px;
+            cursor: pointer;
+            color: red;
+        }
+
+        .container .item .del:hover {
+            background-color: orange;
+        }
+
+        .container .total {
+            background-color: #FFCE46;
+            height: 50px;
+            line-height: 50px;
+            text-align: right;
+        }
+
+        .container .total button {
+            margin: 0 10px;
+            background-color: #DC4C40;
+            height: 35px;
+            width: 80px;
+            border: 0;
+            color: #fff;
+        }
+
+        .container .total span {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <my-cart></my-cart>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+        var CartTitle={
+            template:`<div class="title">我的商品</div>`
+        }
+        var CartList={
+            template:`
+            <div class="content">
+                <div class="item">
+                    <img src="./img/a.jpg" alt="">
+                    <div class="change">
+                        <a href="#">-</a>
+                        <input type="text" class="num">
+                        <a href="#">+</a>
+                    </div>
+                    <div class="del">×</div>
+                </div>
+                <div class="item">
+                    <img src="./img/b.jpg" alt="">
+                    <div class="change">
+                        <a href="#">-</a>
+                        <input type="text" class="num">
+                        <a href="#">+</a>
+                    </div>
+                    <div class="del">×</div>
+                </div>
+                <div class="item">
+                    <img src="./img/c.jpg" alt="">
+                    <div class="change">
+                        <a href="#">-</a>
+                        <input type="text" class="num">
+                        <a href="#">+</a>
+                    </div>
+                    <div class="del">×</div>
+                </div>
+            </div>
+            `
+        }
+        var CartTotal={
+            template:`
+            <div class="total">
+                <span>总价：</span>
+                <span>123</span>
+                <button>结算</button>
+            </div>
+            `
+        }
+        Vue.component('my-cart',{
+            template:`
+            <div class="container">
+                <cart-title></cart-title>
+                <cart-list></cart-list>
+                <cart-total></cart-total>
+            </div>
+            `,
+            components:{
+                'cart-title':CartTitle,
+                'cart-list':CartList,
+                'cart-total':CartTotal
+            }
+        })
+        var vm=new Vue({
+            el:'#app',
+            data:{
+
+            }
+        })
+    </script>
+</body>
+
+</html>
