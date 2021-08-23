@@ -12,4 +12,4 @@
 | Vue                    | 天气查询项目     |                        | Vue                    |
 |                        | 悦听音乐播放器  | 旋转动画效果     |                        |
 | audio，video标签的使用 | audio，video标签的使用 | audio，video标签的使用 | audio，video标签的使用 |
-
+| Vue                    | 图书的增删操作     |学会使用vue基础语法及特性完成简单的增删功能| Vue                    |

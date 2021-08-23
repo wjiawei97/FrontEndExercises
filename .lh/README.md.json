@@ -1,0 +1,18 @@
+{
+    "sourceFile": "README.md",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1629692569768,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1629692569768,
+            "name": "Commit-0",
+            "content": "包含了一些平时的前端练习项目，作为记录\r\n================================\r\n\r\n| 分类                 | 名称                 | 学习目标           | 分类                 |\r\n| ---------------------- | ---------------------- | ---------------------- | ---------------------- |\r\n| HTML+CSS               | 仿京东前端静态页面 | 流式布局           | HTML+CSS               |\r\n|                        | 仿携程前端静态页面 | flex布局             |                        |\r\n|                        | 仿苏宁前端静态页面 | less + 媒体查询 + rem |                        |\r\n| flexible.js + rem      | flexible.js + rem      | flexible.js + rem      | flexible.js + rem      |\r\n| JS                     | 小黑记事本项目  |                        | JS                     |\r\n| JQuery                 | 大事件后台系统  |                        | JQuery                 |\r\n| Vue                    | 天气查询项目     |                        | Vue                    |\r\n|                        | 悦听音乐播放器  | 旋转动画效果     |                        |\r\n| audio，video标签的使用 | audio，video标签的使用 | audio，video标签的使用 | audio，video标签的使用 |\r\n| Vue                    | 图书的增删操作     |学会使用vue基础语法及特性完成简单的增删功能| Vue                    |\r\n"
+        }
+    ]
+}
