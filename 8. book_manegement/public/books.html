@@ -16,9 +16,9 @@
                 <h2>图书管理</h2>
                 <div class="book">
                     <label for="id">编号：</label>
-                    <input type="text" id="id" v-model='id' :disabled="idFlag" v-focus>
+                    <input type="text" id="id" v-model='id' disabled="false" v-focus>
                     <label for="name">名称：</label>
-                    <input type="text" id="name" v-model='name'>
+                    <input type="text" id="name" v-model='name' >  <!-- @keyup.enter='handle' -->
                     <button @click='handle' :disabled="submitFlag">提交</button>
                 </div>
                 <div class="total">
@@ -131,10 +131,10 @@
                         this.idFlag = false
                     } else {
                         //否则为添加
-                        var ret=await axios.get('books',{
+                        var ret=await axios.post('books',{
                             name:this.name
                         })
-                        if(ret.status===200){
+                        if(ret.status==200){
                             //重新加载图书列表数据
                             this.queryData()
                         }
@@ -171,11 +171,15 @@
             //常用特性：侦听器
             //验证图书名称是否已经存在
             watch:{
-                name:function(val){
-                    var nameFlag=this.books.some((item)=>{
-                        return item.name===val
-                    })
-                    if(nameFlag){
+                name:async function(val){                   
+                    // var nameFlag=this.books.some((item)=>{
+                    //     return item.name===val
+                    // })
+                    // if(nameFlag){
+
+                    var ret=await axios.get('/books/book/'+this.name)
+                    // console.log(ret);
+                    if(ret.status==1){
                         //说明图书名称存在
                         this.submitFlag=true  //禁用提交按钮
                     }else{

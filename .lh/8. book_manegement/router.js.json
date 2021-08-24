@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 3,
+            "activePatchIndex": 8,
             "patches": [
                 {
                     "date": 1629785916244,
@@ -20,6 +20,26 @@
                 {
                     "date": 1629786947830,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n //查询图书列表\r\n router.get('/books',service.getAllBooks)\r\n \r\n //添加图书\r\n-router.post('books')\r\n+router.post('books',service.addBook)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629789393760,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n //查询图书列表\r\n router.get('/books',service.getAllBooks)\r\n \r\n //添加图书\r\n-router.post('books',service.addBook)\r\n+router.post('/books',service.addBook)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790010061,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,5 +7,7 @@\n \r\n //添加图书\r\n router.post('/books',service.addBook)\r\n \r\n+//\r\n+\r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790060170,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,7 +7,8 @@\n \r\n //添加图书\r\n router.post('/books',service.addBook)\r\n \r\n-//\r\n+//验证图书名称是否已经存在\r\n+router.get('/books/book',)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790080667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n //添加图书\r\n router.post('/books',service.addBook)\r\n \r\n //验证图书名称是否已经存在\r\n-router.get('/books/book',)\r\n+router.get('/books/book',service.checkName)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629791000016,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n //添加图书\r\n router.post('/books',service.addBook)\r\n \r\n //验证图书名称是否已经存在\r\n-router.get('/books/book',service.checkName)\r\n+router.get('/books/book/:name',service.checkName)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1629785916244,

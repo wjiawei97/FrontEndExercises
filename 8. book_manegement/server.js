@@ -26,6 +26,7 @@ let writeDataToFile=(res)=>{
         })
     })
 }
+
 //获取图书列表数据
 exports.getAllBooks=(req,res)=>{
     res.json(data)
@@ -33,7 +34,7 @@ exports.getAllBooks=(req,res)=>{
 //添加图书
 exports.addBook=(req,res)=>{
     //获取表单数据
-    let info=req.body
+    let info=req.body  //name:this.name
     let book={}
     for(let key in info){
         book[key]=info[key]
@@ -43,4 +44,18 @@ exports.addBook=(req,res)=>{
     data.push(book)
     //将请求数据写入文件
     writeDataToFile(res)
+}
+
+//验证图书名称是否已经存在
+exports.checkName=(req,res)=>{
+    let name=req.params.name
+    
+    var nameFlag=data.some((item)=>{
+        return item.name==name
+    })
+    if(nameFlag){
+        res.json({status:1})  //status==1：名称存在
+    }else{
+        res.json({status:2})  //status==2：名称不存在
+    }
 }

@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 11,
+            "activePatchIndex": 20,
             "patches": [
                 {
                     "date": 1629785976402,
@@ -52,6 +52,42 @@
                 {
                     "date": 1629786932256,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,17 +12,19 @@\n     //获取最大的id值，并返回\r\n     return Math.max.apply(null,arr)\r\n }\r\n \r\n-//数据写入文件\r\n+//数据写入文件,返回响应结果res\r\n let writeDataToFile=(res)=>{\r\n     fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n         if(err){\r\n             res.json({\r\n                 status:500\r\n             })\r\n         }\r\n-        res\r\n+        res.json({\r\n+            status:200\r\n+        })\r\n     })\r\n }\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n"
+                },
+                {
+                    "date": 1629789456992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -32,9 +32,9 @@\n }\r\n //添加图书\r\n exports.addBook=(req,res)=>{\r\n     //获取表单数据\r\n-    let info=req.body\r\n+    let info=req.body  //name:this.name\r\n     let book={}\r\n     for(let key in info){\r\n         book[key]=info[key]\r\n     }\r\n"
+                },
+                {
+                    "date": 1629789532591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,19 +13,31 @@\n     return Math.max.apply(null,arr)\r\n }\r\n \r\n //数据写入文件,返回响应结果res\r\n-let writeDataToFile=(res)=>{\r\n+// let writeDataToFile=(res)=>{\r\n+//     fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n+//         if(err){\r\n+//             res.json({\r\n+//                 status:500\r\n+//             })\r\n+//         }\r\n+//         res.json({\r\n+//             status:200\r\n+//         })\r\n+//     })\r\n+// }\r\n+let writeDataToFile = (res) => {\r\n     fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n         if(err){\r\n             res.json({\r\n-                status:500\r\n-            })\r\n+                status: 500\r\n+            });\r\n         }\r\n         res.json({\r\n-            status:200\r\n-        })\r\n-    })\r\n+            status: 200\r\n+        });\r\n+    });\r\n }\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n     res.json(data)\r\n"
+                },
+                {
+                    "date": 1629789563667,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,32 +13,32 @@\n     return Math.max.apply(null,arr)\r\n }\r\n \r\n //数据写入文件,返回响应结果res\r\n-// let writeDataToFile=(res)=>{\r\n+let writeDataToFile=(res)=>{\r\n+    fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n+        if(err){\r\n+            res.json({\r\n+                status:500\r\n+            })\r\n+        }\r\n+        res.json({\r\n+            status:200\r\n+        })\r\n+    })\r\n+}\r\n+// let writeDataToFile = (res) => {\r\n //     fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n //         if(err){\r\n //             res.json({\r\n-//                 status:500\r\n-//             })\r\n+//                 status: 500\r\n+//             });\r\n //         }\r\n //         res.json({\r\n-//             status:200\r\n-//         })\r\n-//     })\r\n+//             status: 200\r\n+//         });\r\n+//     });\r\n // }\r\n-let writeDataToFile = (res) => {\r\n-    fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n-        if(err){\r\n-            res.json({\r\n-                status: 500\r\n-            });\r\n-        }\r\n-        res.json({\r\n-            status: 200\r\n-        });\r\n-    });\r\n-}\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n     res.json(data)\r\n }\r\n"
+                },
+                {
+                    "date": 1629790145147,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,20 +25,9 @@\n             status:200\r\n         })\r\n     })\r\n }\r\n-// let writeDataToFile = (res) => {\r\n-//     fs.writeFile(path.join(__dirname,'data.json'),JSON.stringify(data,null,4),(err)=>{\r\n-//         if(err){\r\n-//             res.json({\r\n-//                 status: 500\r\n-//             });\r\n-//         }\r\n-//         res.json({\r\n-//             status: 200\r\n-//         });\r\n-//     });\r\n-// }\r\n+\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n     res.json(data)\r\n }\r\n@@ -54,5 +43,11 @@\n     book.id=maxBookCode()+1\r\n     data.push(book)\r\n     //将请求数据写入文件\r\n     writeDataToFile(res)\r\n+}\r\n+\r\n+//验证图书名称是否已经存在\r\n+exports.checkName=(req,res)=>{\r\n+    let name=req.params.name\r\n+    \r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790372114,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,6 +48,8 @@\n \r\n //验证图书名称是否已经存在\r\n exports.checkName=(req,res)=>{\r\n     let name=req.params.name\r\n-    \r\n+    // var nameFlag=this.books.some((item)=>{\r\n+                    //     return item.name===val\r\n+                    // })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790535811,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,13 @@\n \r\n //验证图书名称是否已经存在\r\n exports.checkName=(req,res)=>{\r\n     let name=req.params.name\r\n-    // var nameFlag=this.books.some((item)=>{\r\n-                    //     return item.name===val\r\n-                    // })\r\n+    var nameFlag=data.some((item)=>{\r\n+        return item.name==name\r\n+    })\r\n+    if(nameFlag){\r\n+        res.json({status:1})  //status==1：名称存在\r\n+    }else{\r\n+        res.json({status:2})  //status==2：名称不存在\r\n+    }\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629790853081,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,8 +48,9 @@\n \r\n //验证图书名称是否已经存在\r\n exports.checkName=(req,res)=>{\r\n     let name=req.params.name\r\n+    console.log(name);\r\n     var nameFlag=data.some((item)=>{\r\n         return item.name==name\r\n     })\r\n     if(nameFlag){\r\n"
+                },
+                {
+                    "date": 1629791638405,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -48,12 +48,13 @@\n \r\n //验证图书名称是否已经存在\r\n exports.checkName=(req,res)=>{\r\n     let name=req.params.name\r\n-    console.log(name);\r\n+    \r\n     var nameFlag=data.some((item)=>{\r\n         return item.name==name\r\n     })\r\n+    console.log(nameFlag);\r\n     if(nameFlag){\r\n         res.json({status:1})  //status==1：名称存在\r\n     }else{\r\n         res.json({status:2})  //status==2：名称不存在\r\n"
+                },
+                {
+                    "date": 1629791697584,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,8 @@\n     \r\n     var nameFlag=data.some((item)=>{\r\n         return item.name==name\r\n     })\r\n-    console.log(nameFlag);\r\n     if(nameFlag){\r\n         res.json({status:1})  //status==1：名称存在\r\n     }else{\r\n         res.json({status:2})  //status==2：名称不存在\r\n"
                 }
             ],
             "date": 1629785976402,
