@@ -1,0 +1,30 @@
+{
+    "sourceFile": "8. book_manegement/router.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 3,
+            "patches": [
+                {
+                    "date": 1629785916244,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629786217058,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,9 @@\n const express=require('express')\r\n const router=express.Router()\r\n \r\n //查询图书列表\r\n-router.get('/books')\r\n+router.get('/books',)\r\n \r\n //添加图书\r\n router.post('books')\r\n \r\n"
+                },
+                {
+                    "date": 1629786258076,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,9 +1,10 @@\n const express=require('express')\r\n const router=express.Router()\r\n+const service=require('./server')\r\n \r\n //查询图书列表\r\n-router.get('/books',)\r\n+router.get('/books',service.getAllBooks)\r\n \r\n //添加图书\r\n router.post('books')\r\n \r\n"
+                },
+                {
+                    "date": 1629786947830,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -5,7 +5,7 @@\n //查询图书列表\r\n router.get('/books',service.getAllBooks)\r\n \r\n //添加图书\r\n-router.post('books')\r\n+router.post('books',service.addBook)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                }
+            ],
+            "date": 1629785916244,
+            "name": "Commit-0",
+            "content": "const express=require('express')\r\nconst router=express.Router()\r\n\r\n//查询图书列表\r\nrouter.get('/books')\r\n\r\n//添加图书\r\nrouter.post('books')\r\n\r\nmodule.exports=router"
+        }
+    ]
+}

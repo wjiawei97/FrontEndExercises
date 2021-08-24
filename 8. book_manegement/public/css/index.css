@@ -1,0 +1,33 @@
+.grid {
+    margin: 0 auto;
+    width: 530px;
+    text-align: center;
+}
+
+.grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.grid th {
+    background-color: pink;
+}
+
+.grid th,
+td {
+    border: 1px dashed pink;
+    height: 35px;
+    line-height: 35px;
+}
+
+.grid .book {
+    background-color: pink;
+    padding: 5px 0 10px;
+}
+.grid .total{
+    height: 30px;
+    line-height: 30px;
+    background-color: pink;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
