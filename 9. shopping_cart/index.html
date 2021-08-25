@@ -37,6 +37,14 @@
             margin: 5px;
         }
 
+        .container .item .name {
+            position: absolute;
+            width: 90px;
+            top: 0;
+            left: 55px;
+            font-size: 16px;
+        }
+
         .container .item .change {
             width: 100px;
             height: 45px;
@@ -104,68 +112,101 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
     <script>
-        var CartTitle={
-            template:`<div class="title">我的商品</div>`
+        var CartTitle = {
+            props: ['uname'],
+            template: `<div class="title">{{uname}}商品</div>`
         }
-        var CartList={
-            template:`
+        var CartList = {
+            props: ['list'],
+            template: `
             <div class="content">
-                <div class="item">
-                    <img src="./img/a.jpg" alt="">
+                <div class="item" :key='item.id' v-for='item in list'>
+                    <img :src="item.img" alt="">
+                    <div class="name">{{item.name}}</div>
                     <div class="change">
                         <a href="#">-</a>
                         <input type="text" class="num">
                         <a href="#">+</a>
                     </div>
-                    <div class="del">×</div>
+                    <div class="del" @click='del(item.id)'>×</div>
                 </div>
-                <div class="item">
-                    <img src="./img/b.jpg" alt="">
-                    <div class="change">
-                        <a href="#">-</a>
-                        <input type="text" class="num">
-                        <a href="#">+</a>
-                    </div>
-                    <div class="del">×</div>
-                </div>
-                <div class="item">
-                    <img src="./img/c.jpg" alt="">
-                    <div class="change">
-                        <a href="#">-</a>
-                        <input type="text" class="num">
-                        <a href="#">+</a>
-                    </div>
-                    <div class="del">×</div>
-                </div>
-            </div>
-            `
-        }
-        var CartTotal={
-            template:`
-            <div class="total">
-                <span>总价：</span>
-                <span>123</span>
-                <button>结算</button>
-            </div>
-            `
-        }
-        Vue.component('my-cart',{
-            template:`
-            <div class="container">
-                <cart-title></cart-title>
-                <cart-list></cart-list>
-                <cart-total></cart-total>
             </div>
             `,
-            components:{
-                'cart-title':CartTitle,
-                'cart-list':CartList,
-                'cart-total':CartTotal
+            methods:{
+                del:function(id){
+                    //把id传给父组件
+                    this.$emit('cart-del',id)
+                }
+            }
+        }
+        var CartTotal = {
+            props: ['list'],
+            template: `
+            <div class="total">
+                <span>总价：</span>
+                <span>{{total}}</span>
+                <button>结算</button>
+            </div>
+            `,
+            computed: {
+                total: function () {
+                    var t = 0
+                    this.list.forEach(element => {
+                        t += element.price * element.num
+                    });
+                    return t
+                }
+            }
+        }
+        Vue.component('my-cart', {
+            data: function () {
+                return {
+                    uname: 'Janet',
+                    list: [{
+                        id: 1,
+                        name: 'TCL彩电',
+                        price: 1000,
+                        num: 1,
+                        img: './img/a.jpg'
+                    }, {
+                        id: 2,
+                        name: '机顶盒',
+                        price: 1000,
+                        num: 1,
+                        img: './img/b.jpg'
+                    }, {
+                        id: 3,
+                        name: '海尔冰箱',
+                        price: 1000,
+                        num: 1,
+                        img: './img/c.jpg'
+                    }]
+                }
+            },
+            template: `
+            <div class="container">
+                <cart-title :uname='uname'></cart-title>
+                <cart-list :list='list' @cart-del='delCart($event)'></cart-list>
+                <cart-total :list='list'></cart-total>
+            </div>
+            `,
+            components: {
+                'cart-title': CartTitle,
+                'cart-list': CartList,
+                'cart-total': CartTotal
+            },
+            methods:{
+                delCart:function(id){
+                    var index=this.list.findIndex((item)=>{
+                        return item.id==id
+                    })
+                    this.list.splice(index,1)
+                }
             }
         })
-        var vm=new Vue({
-            el:'#app',
-            data:{
+        var vm = new Vue({
+            el: '#app',
+            data: {
 
             }
         })
