@@ -1,0 +1,18 @@
+{
+    "sourceFile": "8. book_manegement/public/css/index.css",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1629784216716,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1629784216716,
+            "name": "Commit-0",
+            "content": ".grid {\r\n    margin: 0 auto;\r\n    width: 530px;\r\n    text-align: center;\r\n}\r\n\r\n.grid table {\r\n    width: 100%;\r\n    border-collapse: collapse;\r\n}\r\n\r\n.grid th {\r\n    background-color: pink;\r\n}\r\n\r\n.grid th,\r\ntd {\r\n    border: 1px dashed pink;\r\n    height: 35px;\r\n    line-height: 35px;\r\n}\r\n\r\n.grid .book {\r\n    background-color: pink;\r\n    padding: 5px 0 10px;\r\n}\r\n.grid .total{\r\n    height: 30px;\r\n    line-height: 30px;\r\n    background-color: pink;\r\n    border-top: 1px solid #000;\r\n    border-bottom: 1px solid #000;\r\n}"
+        }
+    ]
+}

@@ -1,0 +1,38 @@
+{
+    "sourceFile": "8. book_manegement/index.js",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 5,
+            "patches": [
+                {
+                    "date": 1629785632992,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1629785728681,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,1 +1,6 @@\n const express=require('express')\r\n+const app=express()\r\n+\r\n+app.listen(3000,()=>{\r\n+    console.log();\r\n+})\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629785817231,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,6 +1,12 @@\n const express=require('express')\r\n+const router=require('./router')\r\n+\r\n+\r\n const app=express()\r\n \r\n+\r\n+//配置路由\r\n+\r\n app.listen(3000,()=>{\r\n-    console.log();\r\n+    console.log('running');\r\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629787048188,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,18 @@\n+const bodyParser = require('body-parser')\r\n const express=require('express')\r\n const router=require('./router')\r\n+const bodyParser=require('body-parser')\r\n+const app=express()\r\n \r\n+//启动静态资源服务\r\n+app.use(express.static('public'))\r\n \r\n-const app=express()\r\n+//处理请求参数\r\n+app.use(bodyParser)\r\n \r\n-\r\n //配置路由\r\n+app.use(router)\r\n \r\n app.listen(3000,()=>{\r\n     console.log('running');\r\n })\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1629787111079,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,10 @@\n //启动静态资源服务\r\n app.use(express.static('public'))\r\n \r\n //处理请求参数\r\n-app.use(bodyParser)\r\n+app.use(express.json())\r\n+app.use(express.urlencoded({extended:false}))\r\n \r\n //配置路由\r\n app.use(router)\r\n \r\n"
+                },
+                {
+                    "date": 1629787136509,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,6 @@\n-const bodyParser = require('body-parser')\r\n const express=require('express')\r\n const router=require('./router')\r\n-const bodyParser=require('body-parser')\r\n const app=express()\r\n \r\n //启动静态资源服务\r\n app.use(express.static('public'))\r\n"
+                }
+            ],
+            "date": 1629785632992,
+            "name": "Commit-0",
+            "content": "const express=require('express')\r\n"
+        }
+    ]
+}
