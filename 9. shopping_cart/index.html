@@ -124,18 +124,38 @@
                     <img :src="item.img" alt="">
                     <div class="name">{{item.name}}</div>
                     <div class="change">
-                        <a href="#">-</a>
-                        <input type="text" class="num">
-                        <a href="#">+</a>
+                        <a href="#" @click.prevent='sub(item.id)'>-</a>
+                        <input type="text" class="num" :value='item.num' @blur='changeNum(item.id,$event)'>
+                        <a href="#" @click.prevent='add(item.id)'>+</a>
                     </div>
                     <div class="del" @click='del(item.id)'>×</div>
                 </div>
             </div>
             `,
-            methods:{
-                del:function(id){
+            methods: {
+                del: function (id) {
                     //把id传给父组件
-                    this.$emit('cart-del',id)
+                    this.$emit('cart-del', id)
+                },
+                changeNum: function (id, event) {
+                    //表单失去焦点，得到id和input表单中的值
+                    this.$emit('change-num', {
+                        id: id,
+                        type:'change',
+                        num: event.target.value
+                    })
+                },
+                sub: function (id) {
+                    this.$emit('change-num', {
+                        id: id,
+                        type: 'sub'
+                    })
+                },
+                add: function (id) {
+                    this.$emit('change-num', {
+                        id: id,
+                        type: 'add'
+                    })
                 }
             }
         }
@@ -186,7 +206,7 @@
             template: `
             <div class="container">
                 <cart-title :uname='uname'></cart-title>
-                <cart-list :list='list' @cart-del='delCart($event)'></cart-list>
+                <cart-list :list='list' @cart-del='delCart($event)' @change-num='changeNum($event)'></cart-list>
                 <cart-total :list='list'></cart-total>
             </div>
             `,
@@ -195,12 +215,38 @@
                 'cart-list': CartList,
                 'cart-total': CartTotal
             },
-            methods:{
-                delCart:function(id){
-                    var index=this.list.findIndex((item)=>{
-                        return item.id==id
+            methods: {
+                delCart: function (id) {
+                    var index = this.list.findIndex((item) => {
+                        return item.id == id
                     })
-                    this.list.splice(index,1)
+                    this.list.splice(index, 1)
+                },
+                changeNum: function (val) {
+                    //判断type为加减域、输入域的情况
+                    if (val.type == 'sub') {
+                        this.list.some((item) => {
+                            if (item.id == val.id) {
+                                item.num--
+                                return true
+                            }
+                        })
+                    } else if (val.type == 'add') {
+                        this.list.some((item) => {
+                            if (item.id == val.id) {
+                                item.num++
+                                return true
+                            }
+                        })
+                    } else if (val.type == 'change') {
+                        //根据id更新list中的num
+                        this.list.some((item) => {
+                            if (item.id == val.id) {
+                                item.num = val.num
+                                return true
+                            }
+                        })
+                    }
                 }
             }
         })
