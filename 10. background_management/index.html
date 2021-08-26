@@ -25,12 +25,11 @@
         }
 
         .main {
-            /* display: flex; */
+            display: flex;
             position: absolute;
             top: 50px;
             bottom: 40px;
             width: 100%;
-            background-color: pink;
         }
 
         .content {
@@ -42,6 +41,15 @@
         .left {
             flex: 0 0 20%;
             background-color: #545c64;
+        }
+
+        .left a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .right {
+            margin: 5px;
         }
 
         ul {
@@ -63,6 +71,22 @@
             margin-top: 10px;
         }
 
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        td,
+        th {
+            border: 1px solid #eee;
+            line-height: 35px;
+            font-size: 12px;
+        }
+
+        th {
+            background-color: #ddd;
+        }
+
         .footer {
             height: 40px;
             line-height: 40px;
@@ -78,31 +102,130 @@
 
 <body>
     <div id="app">
-        <div>
-            <header class="header">我的后台管理系统</header>
-            <div class="main">
-                <div class="content left">
-                    <ul>
-                        <li>用户管理</li>
-                        <li>权限管理</li>
-                        <li>商品管理</li>
-                        <li>订单管理</li>
-                        <li>系统设置</li>
-                    </ul>
-                </div>
-                <div class="content right">
-                    xxxxxx
-                </div>
-            </div>
-            <footer class="footer">版权信息</footer>
-        </div>
+        <router-view></router-view>
     </div>
     <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
     <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
     <script>
+        //定义APP根组件
+        const App = {
+            template: `
+            <div>
+            <header class="header">我的后台管理系统</header>
+            <div class="main">
+                <div class="content left">
+                    <ul>
+                        <li><router-link to='/users'>用户管理</router-link></li>
+                        <li><router-link to='/rights'>权限管理</router-link></li>
+                        <li><router-link to='/goods'>商品管理</router-link></li>
+                        <li><router-link to='/orders'>订单管理</router-link></li>
+                        <li><router-link to='/settings'>系统设置</router-link></li>
+                    </ul>
+                </div>
+                <div class="content right">
+                    <div class="main-content">
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+            <footer class="footer">版权信息</footer>
+        </div>
+            `
+        }
+
+        const Users = {
+            data() {
+                return {
+                    userList: [
+                        { id: 1, name: '张三', age: 10 },
+                        { id: 2, name: '李四', age: 20 },
+                        { id: 3, name: '王五', age: 30 },
+                        { id: 4, name: '赵六', age: 40 }
+                    ]
+                }
+            },
+            methods:{
+                goDetail:function(id){
+                    //编程式导航
+                    this.$router.push('/userInfo/'+id)
+                }
+            },
+            template: `
+            <div>
+                <h3>用户管理区域</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>姓名</th>
+                            <th>年龄</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-key='item.id' v-for='item in userList'>
+                            <td>{{item.id}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.age}}</td>
+                            <td><a href='javascript:;' @click='goDetail(item.id)'>详情</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            `
+        }
+        const UserInfo={
+            props:['id'],
+            template:`
+            <div>
+                <h5>用户详情页 --- 用户Id为：{{id}}</h5>
+                <button @click='goBack()'>后退</buttton>    
+            </div>`,
+            methods:{
+                goBack:function(){
+                    this.$router.go(-1)
+                }
+            }
+        }
+        const Rights = {
+            template: `
+            <h3>权限管理区域</h3>
+            `
+        }
+        const Goods = {
+            template: `
+            <h3>商品管理区域</h3>
+            `
+        }
+        const Orders = {
+            template: `
+            <h3>订单管理区域</h3>
+            `
+        }
+        const Settings = {
+            template: `
+            <h3>系统设置区域</h3>
+            `
+        }
+        //创建路由对象
+        const router = new VueRouter({
+            routes: [{
+                path: '/',
+                component: App,
+                redirect: '/users',
+                children: [
+                    { path: '/users', component: Users },
+                    { path: '/userInfo/:id', component: UserInfo,props:true },
+                    { path: '/rights', component: Rights },
+                    { path: '/goods', component: Goods },
+                    { path: '/orders', component: Orders },
+                    { path: '/settings', component: Settings },
+                ]
+            }]
+        })
         const vm = new Vue({
             el: '#app',
-            
+            router
         })
     </script>
 </body>
