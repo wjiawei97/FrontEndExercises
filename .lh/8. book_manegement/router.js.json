@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 8,
+            "activePatchIndex": 16,
             "patches": [
                 {
                     "date": 1629785916244,
@@ -40,6 +40,38 @@
                 {
                     "date": 1629791000016,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -8,7 +8,7 @@\n //添加图书\r\n router.post('/books',service.addBook)\r\n \r\n //验证图书名称是否已经存在\r\n-router.get('/books/book',service.checkName)\r\n+router.get('/books/book/:name',service.checkName)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630038443585,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,5 +10,7 @@\n \r\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n+//根据id值\r\n+\r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630038505247,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,7 +10,8 @@\n \r\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n-//根据id值\r\n+//根据id值查找书\r\n+router.get('books/:id')\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042174841,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n \r\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n-//根据id值查找书\r\n+//根据id值查找书,b\r\n router.get('books/:id')\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042193637,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -10,8 +10,8 @@\n \r\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n-//根据id值查找书,b\r\n+//根据id值查找书,编辑图书信息\r\n router.get('books/:id')\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042641931,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n //根据id值查找书,编辑图书信息\r\n-router.get('books/:id')\r\n+router.get('books/:id',service.toEditBook)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042816591,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -11,7 +11,7 @@\n //验证图书名称是否已经存在\r\n router.get('/books/book/:name',service.checkName)\r\n \r\n //根据id值查找书,编辑图书信息\r\n-router.get('books/:id',service.toEditBook)\r\n+router.get('/books/:id',service.toEditBook)\r\n \r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043029165,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -13,5 +13,7 @@\n \r\n //根据id值查找书,编辑图书信息\r\n router.get('/books/:id',service.toEditBook)\r\n \r\n+//根据id值删除书\r\n+router.delete('/books/:id')\r\n module.exports=router\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043312345,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -14,6 +14,6 @@\n //根据id值查找书,编辑图书信息\r\n router.get('/books/:id',service.toEditBook)\r\n \r\n //根据id值删除书\r\n-router.delete('/books/:id')\r\n+router.delete('/books/:id',service.deleteBook)\r\n module.exports=router\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1629785916244,

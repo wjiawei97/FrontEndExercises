@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 20,
+            "activePatchIndex": 31,
             "patches": [
                 {
                     "date": 1629785976402,
@@ -88,6 +88,50 @@
                 {
                     "date": 1629791697584,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -52,9 +52,8 @@\n     \r\n     var nameFlag=data.some((item)=>{\r\n         return item.name==name\r\n     })\r\n-    console.log(nameFlag);\r\n     if(nameFlag){\r\n         res.json({status:1})  //status==1：名称存在\r\n     }else{\r\n         res.json({status:2})  //status==2：名称不存在\r\n"
+                },
+                {
+                    "date": 1630042277836,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -57,5 +57,12 @@\n         res.json({status:1})  //status==1：名称存在\r\n     }else{\r\n         res.json({status:2})  //status==2：名称不存在\r\n     }\r\n+}\r\n+\r\n+//根据id值查找书,编辑图书信息\r\n+exports.toEditBook=(req,res)=>{\r\n+    data.filter((item)=>{\r\n+        return item.id==id\r\n+    })\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042632179,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,8 +61,9 @@\n }\r\n \r\n //根据id值查找书,编辑图书信息\r\n exports.toEditBook=(req,res)=>{\r\n-    data.filter((item)=>{\r\n-        return item.id==id\r\n+    var book=data.filter((item)=>{\r\n+        return item.id==req.params.id\r\n     })\r\n+    res.json(book)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630042798304,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,8 +61,9 @@\n }\r\n \r\n //根据id值查找书,编辑图书信息\r\n exports.toEditBook=(req,res)=>{\r\n+    console.log(req.params);\r\n     var book=data.filter((item)=>{\r\n         return item.id==req.params.id\r\n     })\r\n     res.json(book)\r\n"
+                },
+                {
+                    "date": 1630042877656,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -61,9 +61,8 @@\n }\r\n \r\n //根据id值查找书,编辑图书信息\r\n exports.toEditBook=(req,res)=>{\r\n-    console.log(req.params);\r\n     var book=data.filter((item)=>{\r\n         return item.id==req.params.id\r\n     })\r\n     res.json(book)\r\n"
+                },
+                {
+                    "date": 1630043051962,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -65,5 +65,8 @@\n     var book=data.filter((item)=>{\r\n         return item.id==req.params.id\r\n     })\r\n     res.json(book)\r\n-}\n\\ No newline at end of file\n+}\r\n+\r\n+//根据id值删除书\r\n+exports.\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043195916,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,7 +1,8 @@\n const path=require('path')\r\n const fs=require('fs')\r\n const data=require('./data.json')\r\n+const { json } = require('body-parser')\r\n \r\n //自动生成图书编号\r\n let maxBookCode=()=>{\r\n     //将data中的数据id都存入arr中\r\n@@ -68,5 +69,10 @@\n     res.json(book)\r\n }\r\n \r\n //根据id值删除书\r\n-exports.\n\\ No newline at end of file\n+exports.deleteBook=(req,res)=>{\r\n+    var book_remain=data.filter((item)=>{\r\n+        return item.id!=req.id\r\n+    })\r\n+    res.json(book_remain)\r\n+}\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043283106,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -71,8 +71,8 @@\n \r\n //根据id值删除书\r\n exports.deleteBook=(req,res)=>{\r\n     var book_remain=data.filter((item)=>{\r\n-        return item.id!=req.id\r\n+        return item.id!=req.params.id\r\n     })\r\n     res.json(book_remain)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043303386,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -73,6 +73,7 @@\n exports.deleteBook=(req,res)=>{\r\n     var book_remain=data.filter((item)=>{\r\n         return item.id!=req.params.id\r\n     })\r\n+    console.log(book_remain);\r\n     res.json(book_remain)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043573472,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,8 +1,7 @@\n const path=require('path')\r\n const fs=require('fs')\r\n const data=require('./data.json')\r\n-const { json } = require('body-parser')\r\n \r\n //自动生成图书编号\r\n let maxBookCode=()=>{\r\n     //将data中的数据id都存入arr中\r\n@@ -26,9 +25,11 @@\n             status:200\r\n         })\r\n     })\r\n }\r\n-\r\n+let writeDataToFile=(res)=>{\r\n+    fs.writeFile(path.__dirname.join('data.json'),JSON.stringify(data),)\r\n+}\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n     res.json(data)\r\n }\r\n@@ -73,7 +74,6 @@\n exports.deleteBook=(req,res)=>{\r\n     var book_remain=data.filter((item)=>{\r\n         return item.id!=req.params.id\r\n     })\r\n-    console.log(book_remain);\r\n     res.json(book_remain)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630043972915,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -25,11 +25,9 @@\n             status:200\r\n         })\r\n     })\r\n }\r\n-let writeDataToFile=(res)=>{\r\n-    fs.writeFile(path.__dirname.join('data.json'),JSON.stringify(data),)\r\n-}\r\n+\r\n //获取图书列表数据\r\n exports.getAllBooks=(req,res)=>{\r\n     res.json(data)\r\n }\r\n@@ -74,6 +72,6 @@\n exports.deleteBook=(req,res)=>{\r\n     var book_remain=data.filter((item)=>{\r\n         return item.id!=req.params.id\r\n     })\r\n-    res.json(book_remain)\r\n+    writeDataToFile(book_remain)\r\n }\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1630044110754,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -69,9 +69,12 @@\n }\r\n \r\n //根据id值删除书\r\n exports.deleteBook=(req,res)=>{\r\n-    var book_remain=data.filter((item)=>{\r\n-        return item.id!=req.params.id\r\n+    data.some((item,index)=>{\r\n+        if(item.id==req.params.id){\r\n+            data.splice(index,1)\r\n+            return true\r\n+        }\r\n     })\r\n-    writeDataToFile(book_remain)\r\n+    writeDataToFile(res)\r\n }\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1629785976402,

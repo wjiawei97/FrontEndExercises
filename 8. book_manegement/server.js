@@ -59,3 +59,22 @@ exports.checkName=(req,res)=>{
         res.json({status:2})  //status==2：名称不存在
     }
 }
+
+//根据id值查找书,编辑图书信息
+exports.toEditBook=(req,res)=>{
+    var book=data.filter((item)=>{
+        return item.id==req.params.id
+    })
+    res.json(book)
+}
+
+//根据id值删除书
+exports.deleteBook=(req,res)=>{
+    data.some((item,index)=>{
+        if(item.id==req.params.id){
+            data.splice(index,1)
+            return true
+        }
+    })
+    writeDataToFile(res)
+}

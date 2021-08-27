@@ -143,17 +143,18 @@
                     this.id = ''
                     this.name = ''
                 },
-                toEdit: function (id) {
+                toEdit: async function (id) {
                     //禁止修改id
                     this.idFlag = true
                     //根据id找book
-                    var book = this.books.filter(function (item) {
-                        return item.id == id
-                    })
+                    // var book = this.books.filter(function (item) {
+                    //     return item.id == id
+                    // })
+                    var book=await axios.get('/books/'+id)
                     this.id = book[0].id
                     this.name = book[0].name
                 },
-                toDelete: function (id) {
+                toDelete: async function (id) {
                     //方法一：利用filter方法把某个book从books中过滤掉
                     this.books = this.books.filter((item) => {
                         return item.id != id
@@ -163,6 +164,10 @@
                     //     return item.id==id
                     // })
                     // this.books.splice(index,1)
+                    var ret=await axios.delete('/books/'+id)
+                    if(ret.status==200){
+                        this.queryData()
+                    }
                 },
                 queryData: async function(){
                     this.books=await axios.get('/books')
