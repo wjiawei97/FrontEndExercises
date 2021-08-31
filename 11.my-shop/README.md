@@ -1,24 +1,13 @@
 # 11.my-shop
 
-## Project setup
+## 运行步骤
+1. 开启mysql
 ```
-npm install
+cd vue_api_server
+npm install 
+node app.js
 ```
-
-### Compiles and hot-reloads for development
+2. 运行vue项目
 ```
-npm run serve
+vue ui
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
