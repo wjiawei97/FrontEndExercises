@@ -1,0 +1,132 @@
+/* @import url("https://fonts.googleapis.com/css?family=Roboto:400,500"); */
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing        : border-box;
+}
+
+[v-cloak]>* {
+  display: none;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  background : #e0dfff;
+  margin     : 0;
+  height     : 100vh;
+  font-size  : 0.875rem;
+  line-height: 1.5;
+
+  -webkit-box-pack     : center;
+  -ms-flex-pack        : center;
+  justify-content      : center;
+  -webkit-box-orient   : vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction   : column;
+  flex-direction       : column;
+
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap             : 0.625rem;
+  grid-template-areas  : ". main main ."". main main .";
+}
+
+.container {
+  width              : 20rem;
+  height             : 20rem;
+  grid-area          : main;
+  -ms-flex-item-align: center;
+  align-self         : center;
+  justify-self       : center;
+  margin             : 10px auto;
+}
+
+a {
+  color          : #4aaee7;
+  background     : transparent;
+  outline        : 0;
+  text-decoration: none;
+  cursor         : pointer;
+}
+
+.notification {
+  position: absolute;
+}
+
+.tooltip-bell {
+  position: absolute;
+  display : block;
+  left    : 9rem;
+  color   : #a5a6a8;
+}
+
+#circle {
+  position     : absolute;
+  top          : 0;
+  left         : 0.75rem;
+  width        : 0.75rem;
+  height       : 0.75rem;
+  border-radius: 100%;
+  background   : #f07379;
+}
+
+.tooltip {
+  position        : absolute;
+  top             : 2.5rem;
+  width           : 20rem;
+  background-color: #fff;
+  box-shadow      : 0 2px 4px 0 rgba(0, 0, 0, .1);
+  border-radius   : 5px;
+  color           : #27303d;
+  height          : 1.5;
+}
+
+.tooltip::before {
+  content      : '';
+  position     : absolute;
+  top          : -0.4rem;
+  right        : 8.3rem;
+  border-left  : 2rem solid transparent;
+  border-right : 2rem solid transparent;
+  border-bottom: 1.5rem solid #fff;
+}
+
+.heading {
+  display      : flex;
+  align-items  : flex-start;
+  padding      : 0.5rem 1rem;
+  border-bottom: 0.01rem solid #eee;
+}
+
+.heading-left,
+.img-left {
+  width : 14rem;
+  margin: 0 1rem 0 0;
+}
+
+.img-left {
+  width: 3rem;
+}
+
+.heading-right,
+.user-content {
+  flex-grow: 1;
+}
+
+ul {
+  list-style-type: none;
+  padding        : 0.5rem 1rem;
+  margin         : 0 0 0.5rem;
+}
+
+.notification-item {
+  display    : flex;
+  align-items: flex-start;
+}
+
+.user-photo {
+  width         : 3rem;
+  height        : 3rem;
+  display       : inline-block;
+  vertical-align: middle;
+}

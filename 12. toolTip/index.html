@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./toolTip.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="notification">
+      <a class="tooltip-bell" @click="show=!show">
+        <i class="far fa-2x fa-bell">xxxxxx</i>
+        <span id="circle"></span>
+      </a>
+      <transition name="fadeStart" v-cloak>
+        <div class="tooltip" v-if="show">
+          <div class="heading">
+            <div class="heading-left">Notifications</div>
+            <div class="heading-right">See All</div>
+          </div>
+          <ul class="notification-list">
+            <li class="notification-item" v-for="item in users" :key="item.id.value">
+              <div class="img-left">
+                <img :src="item.picture.thumbnail" alt="" class="user-photo">
+              </div>
+              <div class="user-content">
+                <p class="user-info">{{(item.name.first)}} {{(item.name.last)}}</p>
+                <p class="time">a hour ago</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </transition>
+    </div>
+  </div>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/vue@next"></script>
+
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          users: [],
+          errors: [],
+          show: true
+        }
+      },
+      mounted() {
+        this.getUsers()
+      },
+      methods: {
+        getUsers() {
+          axios.get('https://randomuser.me/api/?results=3')
+            .then((res) => {
+              // console.log(res.data.results);
+              this.users = res.data.results
+            })
+            .catch((e) => {
+              this.errors.push(e)
+            })
+        },
+      },
+      computed: {
+        // capitalize(name) {
+        //   console.log(name);
+        //   if (name) {
+        //     nam = name.toString()
+        //     return name.charAt(0).toLowerCase() + name.substr(1)
+        //   }
+        // }
+      }
+    }).mount('.container')
+  </script>
+</body>
+
+</html>
