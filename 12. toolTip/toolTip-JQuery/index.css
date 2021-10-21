@@ -1,0 +1,20 @@
+.tooltip {
+  position : absolute;
+  max-width: 300px;
+}
+
+.tip-content {
+  border          : 1px solid gray;
+  border-radius   : 6px;
+  box-shadow      : 0 5px 10px rgba(0, 0, 0, .2);
+  padding         : 5px;
+  background-color: #ffffff;
+}
+
+.tip-content.top {
+  margin-top: 7px;
+}
+
+.tip-content.bottom {
+  margin-top: 7px;
+}
